@@ -14,7 +14,7 @@ phases:
       - export PATH=$PWD/:$PATH
       - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
       - wget https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tgz && tar -zxvf Python-3.7.1.tgz && cd Python-3.7.1 && ./configure && make && sudo make install
-      - rm -rf /usr/bin/python3 && rm -rf /usr/bin/pip3 && ln -s /usr/local/bin/python3 /usr/bin/python3 && ln -s /usr/local/bin/pip3 /usr/bin/pip3
+      - rm -rf /usr/bin/python3 && rm -rf /usr/bin/pip3 && ln -s /usr/local/bin/python3 /usr/bin/python3 && ln -s /usr/local/bin/pip3 /usr/bin/pip3 && cd -
   pre_build:
       commands:
         - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
