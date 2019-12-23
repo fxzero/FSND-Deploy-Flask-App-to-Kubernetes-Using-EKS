@@ -24,7 +24,7 @@ phases:
         - export JWT_SECRET='myjwtsecret'
         - export LOG_LEVEL=DEBUG
         - python3 main.py
-        - export TOKEN=`curl -d '{"email":"abc@abc.com","password":"abc"}' -H "Content-Type: application/json" -X POST localhost:8080/auth  | jq -r '.token'`
+        - TOKEN=`curl -d '{"email":"abc@abc.com","password":"abc"}' -H "Content-Type: application/json" -X POST localhost:8080/auth  | jq -r '.token'`
         - curl --request GET 'http://127.0.0.1:8080/contents' -H "Authorization: Bearer ${TOKEN}" | jq .
   build:
     commands:
