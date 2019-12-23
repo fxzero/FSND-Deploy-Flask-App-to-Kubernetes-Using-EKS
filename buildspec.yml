@@ -14,7 +14,7 @@ phases:
       - export PATH=$PWD/:$PATH
       - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
       - wget https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tgz && tar -zxvf Python-3.7.1.tgz && cd Python-3.7.1 && ./configure && make && sudo make install
-      - rm -rf /usr/bin/python3 && rm -rf /usr/bin/pip3 && ln -s /usr/local/bin/python3 /usr/bin/python3 && ln -s /usr/local/bin/pip3 /usr/bin/pip3 && cd -
+      - ln -s /usr/local/bin/python3 /usr/bin/python3.7 && ln -s /usr/local/bin/pip3 /usr/bin/pip3.7 && cd -
       - pip3 install awscli
   pre_build:
       commands:
@@ -22,9 +22,9 @@ phases:
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' simple_jwt_api.yml
         - $(aws ecr get-login --no-include-email)
         - export KUBECONFIG=$HOME/.kube/config
-        - pip3 install pytest
-        - pip3 install -r requirements.txt
-        - python3 test_main.py
+        - pip3.7 install pytest
+        - pip3.7 install -r requirements.txt
+        - python3.7 test_main.py
   build:
     commands:
       - docker build --tag $REPOSITORY_URI:$TAG .
